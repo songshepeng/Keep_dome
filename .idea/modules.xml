@@ -2,8 +2,10 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/Keep_dome.iml" filepath="$PROJECT_DIR$/Keep_dome.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/Keep_dome.iml" filepath="$PROJECT_DIR$/.idea/Keep_dome.iml" />
+      <module fileurl="file://G:\TXT\workpace\Keep_dome\Keep_dome.iml" filepath="G:\TXT\workpace\Keep_dome\Keep_dome.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://G:\TXT\workpace\Keep_dome\app\app.iml" filepath="G:\TXT\workpace\Keep_dome\app\app.iml" />
     </modules>
   </component>
 </project>
