@@ -26,7 +26,7 @@
             android:layout_centerInParent="true"
             android:text="订场"
             android:textColor="@color/black"
-            android:textSize="@dimen/dimen_40_dip"/>
+            android:textSize="@dimen/dimen_40_dip" />
 
         <ImageView
             android:id="@+id/bt_imgSearch"
@@ -93,6 +93,18 @@
     <android.support.v7.widget.RecyclerView
         android:id="@+id/lv"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:padding="15dp"></android.support.v7.widget.RecyclerView>
+        android:layout_height="match_parent"></android.support.v7.widget.RecyclerView>
+
+    <com.bartoszlipinski.recyclerviewheader2.RecyclerViewHeader
+        android:id="@+id/lv_header"
+        android:layout_width="wrap_content"
+        android:layout_height="20dp">
+
+        <TextView
+            android:id="@+id/tv_header"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="header" />
+    </com.bartoszlipinski.recyclerviewheader2.RecyclerViewHeader>
 </LinearLayout>

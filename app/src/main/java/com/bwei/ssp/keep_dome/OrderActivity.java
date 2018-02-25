@@ -4,14 +4,23 @@ import android.annotation.SuppressLint;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.media.Image;
+import android.net.Uri;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.bartoszlipinski.recyclerviewheader2.RecyclerViewHeader;
+import com.bwei.ssp.keep_dome.adapter.MyLvAdapter;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class OrderActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -21,6 +30,8 @@ public class OrderActivity extends AppCompatActivity implements View.OnClickList
     private TextView mTitleName;
     private ImageView mImgSearch;
     private ImageView mImgBack;
+    private RecyclerView mLv;
+    private RecyclerViewHeader mLvHeader;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +52,22 @@ public class OrderActivity extends AppCompatActivity implements View.OnClickList
 
     private void initData() {
 
+        setData();
+        mLvHeader.attachTo(mLv);
+    }
+
+    private void setData() {
+        List<Data> list = new ArrayList<>();
+
+        Data data = new Data(R.drawable.a1, "950/人", "￥899.00 超级会员卡专享", "北京CBD国际高尔夫俱乐部"
+                , "5km", "北京市朝阳区高碑店路99号");
+        Data data1 = new Data(R.drawable.a2, "950/人", "￥899.00 超级会员卡专享", "北京CBD国际高尔夫俱乐部"
+                , "5km", "北京市朝阳区高碑店路99号");
+        list.add(data);
+        list.add(data1);
+        MyLvAdapter adapter = new MyLvAdapter(this, list);
+        mLv.setLayoutManager(new LinearLayoutManager(this));
+        mLv.setAdapter(adapter);
     }
 
     private void initView() {
@@ -50,6 +77,9 @@ public class OrderActivity extends AppCompatActivity implements View.OnClickList
         mTvCity = (TextView) findViewById(R.id.tv_city);
         mTvPrice = (TextView) findViewById(R.id.tv_price);
         mTvDistance = (TextView) findViewById(R.id.tv_distance);
+        mLv = (RecyclerView) findViewById(R.id.lv);
+        mLvHeader = (RecyclerViewHeader) findViewById(R.id.lv_header);
+
     }
 
 
