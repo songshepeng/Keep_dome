@@ -27,7 +27,15 @@ public class City_list_Adapter extends RecyclerView.Adapter<City_list_Adapter.My
         this.citylist = citylist;
         this.context = context;
     }
-
+    private int thisPosition;
+    //定义值保存当前的id
+    public int getthisPosition() {
+        return thisPosition;
+    }
+    //再定义一个int类型的返回值方法
+    public void setThisPosition(int thisPosition) {
+        this.thisPosition = thisPosition;
+    }
     public void setListenr(setOnclickListenr listenr) {
         this.listenr = listenr;
     }
@@ -43,14 +51,24 @@ public class City_list_Adapter extends RecyclerView.Adapter<City_list_Adapter.My
     public void onBindViewHolder(final Myhoder holder, final int position) {
         holder.city_tv.setText(citylist.get(position));
         final int i =1;
+        final Myhoder recViewHolderLeft = (Myhoder) holder;
+        if (position == getthisPosition()) {
+            recViewHolderLeft.city_tv.setTextColor(Color.WHITE);
+            Resources resources = context.getResources();
+            Drawable drawable = resources.getDrawable(R.drawable.city_tv_end);
+            recViewHolderLeft.city_tv.setBackgroundDrawable(drawable);
+        }else {
+            recViewHolderLeft.city_tv.setTextColor(Color.GRAY);
+            Resources resources = context.getResources();
+            Drawable drawable = resources.getDrawable(R.drawable.city_tv_back);
+            recViewHolderLeft.city_tv.setBackgroundDrawable(drawable);
+        }
+
         holder.city_tv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                    holder.city_tv.setTextColor(Color.WHITE);
-                    Resources resources = context.getResources();
-                    Drawable drawable = resources.getDrawable(R.drawable.city_tv_end);
-                    holder.city_tv.setBackgroundDrawable(drawable);
-            }
+                listenr.clickListen(v,position);
+                }
         });
     }
     @Override
