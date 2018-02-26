@@ -33,28 +33,28 @@ public class SearchActivity extends AppCompatActivity {
         search_content.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                if (actionId== EditorInfo.IME_ACTION_SEARCH ||(event!=null&&event.getKeyCode()== KeyEvent.KEYCODE_ENTER)){
-                  //回车键触发搜索
-                 switch (event.getAction()){
-                     case KeyEvent.ACTION_UP:
+                if (actionId == EditorInfo.IME_ACTION_SEARCH || (event != null && event.getKeyCode() == KeyEvent.KEYCODE_ENTER)) {
+                    //回车键触发搜索
+                    switch (event.getAction()) {
+                        case KeyEvent.ACTION_UP:
 
-                         //解决消费两次onEditorAction事件
-                         String s = search_content.getText().toString();
-                         //此处做判断 后台是否有数据 根据结果 跳转不同的界面
-                         Log.e("**",s );
+                            //解决消费两次onEditorAction事件
+                            String s = search_content.getText().toString();
+                            //此处做判断 后台是否有数据 根据结果 跳转不同的界面
+                            Log.e("**", s);
 
-                             Intent intent = new Intent(SearchActivity.this, SearchresultActivity.class);
-                             intent.putExtra("searchtv",s);
-                             startActivity(intent);
+                            Intent intent = new Intent(SearchActivity.this, SearchresultActivity.class);
+                            intent.putExtra("searchtv", s);
+                            startActivity(intent);
 
 //                             Intent intent = new Intent(SearchActivity.this, OrderActivity.class);
 //                             startActivity(intent);
 
 
-                         return true;
-                 }
+                            return true;
+                    }
                     return true;
-                 //指定onEditorAction被if判断消费
+                    //指定onEditorAction被if判断消费
                 }
                 return false;
             }
@@ -67,7 +67,7 @@ public class SearchActivity extends AppCompatActivity {
         searchlist.add("DIDI高尔夫俱乐部佳佳店");
         search_list.setLayoutManager(new LinearLayoutManager(this));
         search_list.addItemDecoration(new
-                DividerItemDecoration(this,DividerItemDecoration.VERTICAL));
+                DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
 
         Search_list_Adapter search_list_adapter = new Search_list_Adapter(searchlist, this);
         search_list.setAdapter(search_list_adapter);
@@ -76,6 +76,8 @@ public class SearchActivity extends AppCompatActivity {
             @Override
             public void clickListen(View v, int position) {
                 //推荐列表做的点击事件
+                Intent intent = new Intent(SearchActivity.this, OrderActivity.class);
+                startActivity(intent);
             }
         });
 
