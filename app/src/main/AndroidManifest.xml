@@ -16,10 +16,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".OrderActivity"></activity>
-        <activity android:name=".SearchActivity"
-            android:windowSoftInputMode="stateAlwaysVisible"
-            ></activity>
+        <activity android:name=".OrderActivity" />
+        <activity android:name=".SearchActivity" />
+        <!-- android:windowSoftInputMode="stateAlwaysVisible" -->
+        <activity android:name=".SearchresultActivity"></activity>
     </application>
 
 </manifest>
