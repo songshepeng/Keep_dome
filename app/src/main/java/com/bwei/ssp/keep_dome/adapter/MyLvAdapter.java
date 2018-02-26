@@ -16,6 +16,7 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bwei.ssp.keep_dome.Data;
 import com.bwei.ssp.keep_dome.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -26,6 +27,7 @@ public class MyLvAdapter extends RecyclerView.Adapter<MyLvAdapter.MyHolder> {
 
     private Context context;
     private List<Data> list;
+    private List<String> datas = new ArrayList<>();
 
     public MyLvAdapter(Context context, List<Data> list) {
         this.context = context;
@@ -77,4 +79,5 @@ public class MyLvAdapter extends RecyclerView.Adapter<MyLvAdapter.MyHolder> {
 
         }
     }
+
 }
