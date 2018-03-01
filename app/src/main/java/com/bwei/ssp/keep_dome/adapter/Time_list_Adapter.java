@@ -78,7 +78,6 @@ public class Time_list_Adapter extends RecyclerView.Adapter<Time_list_Adapter.My
         });
         boolean b = isB();
 
-        if (b==true){
             if (position == getthisPosition()) {
                 recViewHolderLeft.city_tv.setTextColor(Color.WHITE);
                 Resources resources = context.getResources();
@@ -90,7 +89,7 @@ public class Time_list_Adapter extends RecyclerView.Adapter<Time_list_Adapter.My
                 Drawable drawable = resources.getDrawable(R.drawable.none_checked);
                 recViewHolderLeft.city_tv.setBackgroundDrawable(drawable);
             }
-        }
+
     }
 
     @Override

@@ -77,7 +77,7 @@ public class Timepm_list_Adapter extends RecyclerView.Adapter<Timepm_list_Adapte
 
         boolean b = isB();
 
-        if (b==true){
+
 
             if (position == getthisPosition()) {
                 recViewHolderLeft.city_tv.setTextColor(Color.WHITE);
@@ -90,7 +90,7 @@ public class Timepm_list_Adapter extends RecyclerView.Adapter<Timepm_list_Adapte
                 Drawable drawable = resources.getDrawable(R.drawable.none_checked);
                 recViewHolderLeft.city_tv.setBackgroundDrawable(drawable);
             }
-        }
+
         Log.e("*pm*", b+"8");
 
         }

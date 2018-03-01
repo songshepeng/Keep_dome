@@ -202,7 +202,6 @@ public class BespeakActivity extends AppCompatActivity {
         am_list.setAdapter(time_list_adapter);
         time_list_adapter1 = new Timepm_list_Adapter(pmlist, this);
         pm_list.setAdapter(time_list_adapter1);
-
         time_list_adapter.setListenr(new Time_list_Adapter.setOnclickListenr() {
             @Override
             public void clickListen(View v, int position, String str) {
@@ -213,6 +212,8 @@ public class BespeakActivity extends AppCompatActivity {
                 time.setText(str);
                 time_list_adapter1.setB(isam);
                // timewindow.dismiss();
+                time_list_adapter1.setThisPosition(-1);
+                time_list_adapter1.notifyDataSetChanged();
                 time_list_adapter1.setListenr(new Timepm_list_Adapter.setOnclickListenr() {
                     @Override
                     public void clickListen(View v, int position, String str) {
@@ -220,10 +221,11 @@ public class BespeakActivity extends AppCompatActivity {
                         //绑定当前点击的id
                         time_list_adapter1.notifyDataSetChanged();
                         //嫑忘记刷新适配器
-                      //  time.setText(str);
+                         time.setText(str);
                         // timewindow.dismiss();
                         time_list_adapter.setB(ispm);
-
+                        time_list_adapter.setThisPosition(-1);
+                        time_list_adapter.notifyDataSetChanged();
                     }
                 });
             }
@@ -239,6 +241,8 @@ public class BespeakActivity extends AppCompatActivity {
                  time.setText(str);
                // timewindow.dismiss();
                 time_list_adapter.setB(ispm);
+                time_list_adapter.setThisPosition(-1);
+                time_list_adapter.notifyDataSetChanged();
                 time_list_adapter.setListenr(new Time_list_Adapter.setOnclickListenr() {
                     @Override
                     public void clickListen(View v, int position, String string) {
@@ -246,8 +250,10 @@ public class BespeakActivity extends AppCompatActivity {
                         //绑定当前点击的id
                         time_list_adapter.notifyDataSetChanged();
                         //嫑忘记刷新适配器
-                       // time.setText(str);
+                        time.setText(string);
                         time_list_adapter1.setB(isam);
+                        time_list_adapter1.setThisPosition(-1);
+                        time_list_adapter1.notifyDataSetChanged();
                     }
                 });
             }
