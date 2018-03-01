@@ -11,6 +11,9 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.bwei.ssp.keep_dome.R;
+import com.bwei.ssp.keep_dome.bean.StateBean;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.List;
 
@@ -22,6 +25,7 @@ public class Time_list_Adapter extends RecyclerView.Adapter<Time_list_Adapter.My
    List<String>citylist;
    Context context;
     setOnclickListenr listenr;
+
     public Time_list_Adapter(List<String> citylist, Context context) {
         this.citylist = citylist;
         this.context = context;
@@ -35,12 +39,23 @@ public class Time_list_Adapter extends RecyclerView.Adapter<Time_list_Adapter.My
     public void setThisPosition(int thisPosition) {
         this.thisPosition = thisPosition;
     }
+    private boolean b=true;
+
+    public boolean isB() {
+        return b;
+    }
+
+    public void setB(boolean b) {
+        this.b = b;
+    }
+
     public void setListenr(setOnclickListenr listenr) {
         this.listenr = listenr;
     }
 
     @Override
     public Myhoder onCreateViewHolder(ViewGroup parent, int viewType) {
+
         View inflate = LayoutInflater.from(context).inflate(R.layout.time_item, parent, false);
         Myhoder myhoder = new Myhoder(inflate);
         return myhoder;
@@ -48,6 +63,7 @@ public class Time_list_Adapter extends RecyclerView.Adapter<Time_list_Adapter.My
 
     @Override
     public void onBindViewHolder(final Myhoder holder, final int position) {
+
         holder.city_tv.setText(citylist.get(position));
         final int i =1;
         final Myhoder recViewHolderLeft = (Myhoder) holder;
@@ -56,20 +72,27 @@ public class Time_list_Adapter extends RecyclerView.Adapter<Time_list_Adapter.My
             public void onClick(View v) {
                 String s = holder.city_tv.getText().toString();
                 listenr.clickListen(v,position,s);
+                StateBean stateBean = new StateBean(false);
+                EventBus.getDefault().postSticky(stateBean);
                 }
         });
-        if (position == getthisPosition()) {
-            recViewHolderLeft.city_tv.setTextColor(Color.WHITE);
-            Resources resources = context.getResources();
-            Drawable drawable = resources.getDrawable(R.drawable.time_tv_bg);
-            recViewHolderLeft.city_tv.setBackgroundDrawable(drawable);
-        }else {
-            recViewHolderLeft.city_tv.setTextColor(Color.GRAY);
-            Resources resources = context.getResources();
-            Drawable drawable = resources.getDrawable(R.drawable.none_checked);
-            recViewHolderLeft.city_tv.setBackgroundDrawable(drawable);
+        boolean b = isB();
+
+        if (b==true){
+            if (position == getthisPosition()) {
+                recViewHolderLeft.city_tv.setTextColor(Color.WHITE);
+                Resources resources = context.getResources();
+                Drawable drawable = resources.getDrawable(R.drawable.time_tv_bg);
+                recViewHolderLeft.city_tv.setBackgroundDrawable(drawable);
+            }else {
+                recViewHolderLeft.city_tv.setTextColor(Color.GRAY);
+                Resources resources = context.getResources();
+                Drawable drawable = resources.getDrawable(R.drawable.none_checked);
+                recViewHolderLeft.city_tv.setBackgroundDrawable(drawable);
+            }
         }
     }
+
     @Override
     public int getItemCount() {
         return citylist.size();

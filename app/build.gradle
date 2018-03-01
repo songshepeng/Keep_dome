@@ -36,4 +36,5 @@ dependencies {
     compile 'com.github.Aspsine:SwipeToLoadLayout:v1.0.0'
     compile 'com.android.support:cardview-v7:26.1.0'
     compile 'com.jakewharton:butterknife:6.1.0'
+    compile 'org.greenrobot:eventbus:+'
 }

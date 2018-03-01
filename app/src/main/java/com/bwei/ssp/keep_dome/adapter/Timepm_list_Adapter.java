@@ -5,11 +5,15 @@ import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.bwei.ssp.keep_dome.R;
+import com.bwei.ssp.keep_dome.bean.PmBean;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.List;
 
@@ -35,6 +39,17 @@ public class Timepm_list_Adapter extends RecyclerView.Adapter<Timepm_list_Adapte
     public void setThisPosition(int thisPosition) {
         this.thisPosition = thisPosition;
     }
+
+    private boolean b=true;
+
+    public boolean isB() {
+        return b;
+    }
+
+    public void setB(boolean b) {
+        this.b = b;
+    }
+
     public void setListenr(setOnclickListenr listenr) {
         this.listenr = listenr;
     }
@@ -55,20 +70,32 @@ public class Timepm_list_Adapter extends RecyclerView.Adapter<Timepm_list_Adapte
             public void onClick(View v) {
                 String s = holder.city_tv.getText().toString();
                 listenr.clickListen(v,position,s);
-                }
+                PmBean pmBean = new PmBean(false);
+                EventBus.getDefault().postSticky(pmBean);
+            }
         });
-        if (position == getthisPosition()) {
-            recViewHolderLeft.city_tv.setTextColor(Color.WHITE);
-            Resources resources = context.getResources();
-            Drawable drawable = resources.getDrawable(R.drawable.time_tv_bg);
-            recViewHolderLeft.city_tv.setBackgroundDrawable(drawable);
-        }else {
-            recViewHolderLeft.city_tv.setTextColor(Color.GRAY);
-            Resources resources = context.getResources();
-            Drawable drawable = resources.getDrawable(R.drawable.none_checked);
-            recViewHolderLeft.city_tv.setBackgroundDrawable(drawable);
+
+        boolean b = isB();
+
+        if (b==true){
+
+            if (position == getthisPosition()) {
+                recViewHolderLeft.city_tv.setTextColor(Color.WHITE);
+                Resources resources = context.getResources();
+                Drawable drawable = resources.getDrawable(R.drawable.time_tv_bg);
+                recViewHolderLeft.city_tv.setBackgroundDrawable(drawable);
+            }else {
+                recViewHolderLeft.city_tv.setTextColor(Color.GRAY);
+                Resources resources = context.getResources();
+                Drawable drawable = resources.getDrawable(R.drawable.none_checked);
+                recViewHolderLeft.city_tv.setBackgroundDrawable(drawable);
+            }
         }
-    }
+        Log.e("*pm*", b+"8");
+
+        }
+
+
     @Override
     public int getItemCount() {
         return citylist.size();
@@ -82,6 +109,8 @@ public class Timepm_list_Adapter extends RecyclerView.Adapter<Timepm_list_Adapte
 
         }
     }
+
+
     public interface setOnclickListenr{
         void  clickListen(View v, int position, String string);
     }

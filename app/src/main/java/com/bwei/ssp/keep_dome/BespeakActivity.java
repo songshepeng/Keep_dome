@@ -25,7 +25,13 @@ import android.widget.Toast;
 import com.bwei.ssp.keep_dome.adapter.Time_list_Adapter;
 import com.bwei.ssp.keep_dome.adapter.Timepm_list_Adapter;
 import com.bwei.ssp.keep_dome.adapter.Venue_list_Adapter;
+import com.bwei.ssp.keep_dome.bean.PmBean;
+import com.bwei.ssp.keep_dome.bean.StateBean;
 import com.bwei.ssp.keep_dome.bean.Venue_bean;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -52,12 +58,17 @@ public class BespeakActivity extends AppCompatActivity {
     private PopupWindow window;
     private View time_view;
     private PopupWindow timewindow;
+    private boolean isam;
+    private Timepm_list_Adapter time_list_adapter1;
+    private boolean ispm;
+    private Time_list_Adapter time_list_adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bespeak);
         ButterKnife.inject(this);
+        EventBus.getDefault().register(this);
         // 3.0Android Studio 用ButterKnife  在defaultConfig 添加 javaCompileOptions { annotationProcessorOptions { includeCompileClasspath = true } }
         time.setClickable(false);
         sure.setClickable(false);
@@ -168,7 +179,6 @@ public class BespeakActivity extends AppCompatActivity {
         // TODO: 2016/5/17 以下拉的方式显示，并且可以设置显示的位置
         timewindow.showAsDropDown(showTime, 0, 20);
     }
-
     private void getTime_data() {
         TextView back = time_view.findViewById(R.id.back);
         RecyclerView am_list = time_view.findViewById(R.id.am_list);
@@ -188,9 +198,11 @@ public class BespeakActivity extends AppCompatActivity {
         pmlist.add("18:00");
         pmlist.add("19:00");
         pmlist.add("20:00");
-
-        final Time_list_Adapter time_list_adapter = new Time_list_Adapter(amlist, this);
+        time_list_adapter = new Time_list_Adapter(amlist, this);
         am_list.setAdapter(time_list_adapter);
+        time_list_adapter1 = new Timepm_list_Adapter(pmlist, this);
+        pm_list.setAdapter(time_list_adapter1);
+
         time_list_adapter.setListenr(new Time_list_Adapter.setOnclickListenr() {
             @Override
             public void clickListen(View v, int position, String str) {
@@ -199,11 +211,24 @@ public class BespeakActivity extends AppCompatActivity {
                 time_list_adapter.notifyDataSetChanged();
                 //嫑忘记刷新适配器
                 time.setText(str);
-                // window.dismiss();
+                time_list_adapter1.setB(isam);
+               // timewindow.dismiss();
+                time_list_adapter1.setListenr(new Timepm_list_Adapter.setOnclickListenr() {
+                    @Override
+                    public void clickListen(View v, int position, String str) {
+                        time_list_adapter1.setThisPosition(position);
+                        //绑定当前点击的id
+                        time_list_adapter1.notifyDataSetChanged();
+                        //嫑忘记刷新适配器
+                      //  time.setText(str);
+                        // timewindow.dismiss();
+                        time_list_adapter.setB(ispm);
+
+                    }
+                });
             }
         });
-        final Timepm_list_Adapter time_list_adapter1 = new Timepm_list_Adapter(pmlist, this);
-        pm_list.setAdapter(time_list_adapter1);
+
         time_list_adapter1.setListenr(new Timepm_list_Adapter.setOnclickListenr() {
             @Override
             public void clickListen(View v, int position, String str) {
@@ -211,12 +236,22 @@ public class BespeakActivity extends AppCompatActivity {
                 //绑定当前点击的id
                 time_list_adapter1.notifyDataSetChanged();
                 //嫑忘记刷新适配器
-                time.setText(str);
-                // window.dismiss();
+                 time.setText(str);
+               // timewindow.dismiss();
+                time_list_adapter.setB(ispm);
+                time_list_adapter.setListenr(new Time_list_Adapter.setOnclickListenr() {
+                    @Override
+                    public void clickListen(View v, int position, String string) {
+                        time_list_adapter.setThisPosition(position);
+                        //绑定当前点击的id
+                        time_list_adapter.notifyDataSetChanged();
+                        //嫑忘记刷新适配器
+                       // time.setText(str);
+                        time_list_adapter1.setB(isam);
+                    }
+                });
             }
         });
-
-
         time.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -233,8 +268,18 @@ public class BespeakActivity extends AppCompatActivity {
                 Resources resources = BespeakActivity.this.getResources();
                 Drawable drawable = resources.getDrawable(R.drawable.time_tv_bg);
                 sure.setBackgroundDrawable(drawable);
+               // Toast.makeText(BespeakActivity.this,"请点击确认",Toast.LENGTH_LONG).show();
             }
         });
     }
-
+    @Subscribe(threadMode = ThreadMode.MAIN,sticky = true) //在ui线程执行
+    public void onDataSynEvent(StateBean event) {
+        isam = event.isIstrus();
+        Log.e("***", "event---->" + event.isIstrus()+"");
+    }
+    @Subscribe(threadMode = ThreadMode.MAIN,sticky = true) //在ui线程执行
+    public void onPmDataSynEvent(PmBean event) {
+       ispm =  event.isIspm();
+        Log.e("***", "pmevent---->" + event.isIspm()+"");
+    }
 }
