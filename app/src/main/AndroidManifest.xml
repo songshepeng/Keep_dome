@@ -9,20 +9,21 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
-
-        </activity>
+        <activity android:name=".MainActivity" />
         <activity android:name=".OrderActivity" />
         <activity android:name=".SearchActivity" />
         <!-- android:windowSoftInputMode="stateAlwaysVisible" -->
         <activity android:name=".SearchresultActivity" />
-        <activity android:name=".BespeakActivity">
+        <activity android:name=".BespeakActivity"></activity>
+        <activity android:name=".order.OrderActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".order.NoMemberActivity" />
+        <activity android:name=".order.MemberActivity"></activity>
     </application>
 
 </manifest>
