@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.bwei.ssp.keep_dome.window.SomeWindowActivity">
+     <Button
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:id="@+id/only_one"
+         android:text="每天只能享受一次会员减价"
+         />
+     <Button
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:id="@+id/toplimit"
+         android:text="购买上限"
+         />
+
+     <Button
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:id="@+id/Continue_to_experience"
+         android:text="继续体验"
+         />
+
+     <Button
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:id="@+id/Multiple_experiences"
+         android:text="多次体验，开通会员"
+         />
+     <Button
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:id="@+id/give_up_time"
+         android:text="放弃推荐时间段"
+         />
+
+     <Button
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:text="超级会员支付失败"
+         android:id="@+id/pay_no"
+         />
+     <Button
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:text="超级会员支付成功"
+         android:id="@+id/pay_yes"
+         />
+     <Button
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:text="课程支付成功"
+         android:id="@+id/pay_yes_curriculum"
+         />
+
+     <Button
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:text="会员当日再次购买订场"
+         android:id="@+id/again_buy"
+         />
+     <Button
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:text="删除订单"
+         android:id="@+id/del_ordel"
+         />
+     <Button
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:text="订场支付成功"
+         android:id="@+id/Booking_pay_yes"
+         />
+
+     <Button
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:text="取消预约"
+         android:id="@+id/cancel_reservation"
+         />
+     <Button
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:text="放弃支付"
+         android:id="@+id/give_up_pay"
+         />
+
+</LinearLayout>
